@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.rarcher.mirror.Info.Makeup;
 import com.zeusee.zmobileapi.AuthCallback;
 import com.zeusee.zmobileapi.STUtils;
 
@@ -37,10 +38,14 @@ import zeusees.tracking.FaceTracking;
 public class FaceOverlapFragment extends CameraOverlapFragment {
 
 
-    public static int Alpha = 50;
+    public static int Alpha = 100;
     public static float blur_radius = 0.5f;
-    private static final int MESSAGE_DRAW_POINTS = 100;
+    public static int Clip_Color = 0x8feb3452;
 
+    Makeup makeup = new Makeup();
+
+
+    private static final int MESSAGE_DRAW_POINTS = 100;
     private FaceTracking mMultiTrack106 = null;
     private TrackCallBack mListener;
     private HandlerThread mHandlerThread;
@@ -206,7 +211,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
                 canvas.drawText(""+i,p.x,p.y,paint);
             }
 
-            paint.setColor(Color.rgb(255, 15, 52));
+            paint.setColor(Clip_Color);
          //   paint.setColor(0XD81B60);
             paint.setAlpha(Alpha);
             paint.setStyle(Style.FILL);

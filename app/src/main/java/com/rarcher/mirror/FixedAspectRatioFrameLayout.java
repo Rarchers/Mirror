@@ -6,8 +6,11 @@ import android.widget.FrameLayout;
 
 
 public class FixedAspectRatioFrameLayout extends FrameLayout {
-    private int mAspectRatioWidth = 480;
-    private int mAspectRatioHeight = 640;
+    private int mAspectRatioWidth = 1080;
+    private int mAspectRatioHeight = 1920;
+  /*  private int mAspectRatioWidth = 480;
+    private int mAspectRatioHeight = 640;*/
+
 
     public FixedAspectRatioFrameLayout(Context context) {
         super(context);
@@ -41,4 +44,5 @@ public class FixedAspectRatioFrameLayout extends FrameLayout {
                 MeasureSpec.makeMeasureSpec(finalWidth, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(finalHeight, MeasureSpec.EXACTLY));
     }
+
 }

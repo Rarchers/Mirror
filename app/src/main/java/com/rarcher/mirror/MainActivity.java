@@ -100,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SeekBar seekBar = findViewById(R.id.seekBar);
+
         SeekBar seekBar1 = findViewById(R.id.seekBar2);
-        final TextView textView = findViewById(R.id.textView);
+
         final TextView textView1 = findViewById(R.id.textView2);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -140,23 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView.setText("当前透明度:"+ Integer.toString( progress ) );
-                FaceOverlapFragment.Alpha = progress;
-            }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
 
         verifyStoragePermissions(this);
