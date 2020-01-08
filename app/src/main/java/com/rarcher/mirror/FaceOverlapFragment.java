@@ -1,6 +1,7 @@
 package com.rarcher.mirror;
 
 import android.annotation.SuppressLint;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zeusee.zmobileapi.AuthCallback;
+import com.zeusee.zmobileapi.STUtils;
 
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 
 
     public static int Alpha = 50;
-
+    public static float blur_radius = 0.5f;
     private static final int MESSAGE_DRAW_POINTS = 100;
 
     private FaceTracking mMultiTrack106 = null;
@@ -169,7 +171,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 
                 }
 
-                //STUtils.drawFaceRect(canvas,rect, PREVIEW_HEIGHT, PREVIEW_WIDTH, frontCamera);
+               // STUtils.drawFaceRect(canvas,rect, PREVIEW_HEIGHT, PREVIEW_WIDTH, frontCamera);
                 drawPoints(canvas, mPaint, points,visibles, PREVIEW_HEIGHT, PREVIEW_WIDTH, frontCamera);
 
             }
@@ -208,6 +210,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
          //   paint.setColor(0XD81B60);
             paint.setAlpha(Alpha);
             paint.setStyle(Style.FILL);
+            paint.setMaskFilter(new BlurMaskFilter(blur_radius, BlurMaskFilter.Blur.NORMAL));
             canvas.drawPath(clip_up,paint);
             canvas.drawPath(clip_down,paint);
 

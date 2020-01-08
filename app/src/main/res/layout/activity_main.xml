@@ -33,4 +33,18 @@
         android:layout_height="wrap_content"
         android:text="口红透明度（0--255 ） 默认50" />
 
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:progress="5"
+        android:max="100"
+        style="@android:style/Widget.Holo.SeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="高斯模糊值" />
+
 </LinearLayout>

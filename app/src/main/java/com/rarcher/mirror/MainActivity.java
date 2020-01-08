@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SeekBar seekBar = findViewById(R.id.seekBar);
+        SeekBar seekBar1 = findViewById(R.id.seekBar2);
         final TextView textView = findViewById(R.id.textView);
+        final TextView textView1 = findViewById(R.id.textView2);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -119,6 +121,25 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float v = progress;
+                v/=10;
+                textView1.setText("当前高斯模糊数值:"+  v  );
+                FaceOverlapFragment.blur_radius = v;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

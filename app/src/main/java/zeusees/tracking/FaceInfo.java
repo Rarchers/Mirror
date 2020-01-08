@@ -21,7 +21,7 @@ public class FaceInfo {
         return clip_down;
     }
 
-    private Path getClip_down(PointF[] pointFS, int width){
+   /* private Path getClip_down(PointF[] pointFS, int width){
         Path path = new Path();
         path.moveTo(width-pointFS[61].x,pointFS[61].y);
         path.quadTo((width-pointFS[61].x+width-pointFS[63].x)/2,(pointFS[61].y+pointFS[63].y)/2,width-pointFS[63].x,pointFS[63].y);
@@ -36,8 +36,8 @@ public class FaceInfo {
         path.quadTo((width-pointFS[65].x+width-pointFS[61].x)/2,(pointFS[65].y+pointFS[61].y)/2,width-pointFS[61].x,pointFS[61].y);
 
         return path;
-    }
-    private Path getClip_down1(PointF[] pointFS, int width){
+    }*/
+    private Path getClip_down(PointF[] pointFS, int width){
         Path path = new Path();
         path.moveTo(width-pointFS[61].x,pointFS[61].y);
         path.lineTo(width-pointFS[63].x,pointFS[63].y);
