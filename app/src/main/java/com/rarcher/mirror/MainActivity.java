@@ -3,7 +3,6 @@ package com.rarcher.mirror;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.app.Activity;
@@ -13,13 +12,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cleveroad.sy.cyclemenuwidget.CycleMenuWidget;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,8 +25,11 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static int CAMERA_REQUEST_CODE = 0x111;
+    CycleMenuWidget cycleMenuWidget;
 
+
+
+    private final static int CAMERA_REQUEST_CODE = 0x111;
     public void copyFilesFromAssets(Context context, String oldPath, String newPath) {
         try {
             String[] fileNames = context.getAssets().list(oldPath);
@@ -96,10 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        cycleMenuWidget = findViewById(R.id.itemCycleMenuWidget);
+        cycleMenuWidget.setMenuRes(R.menu.makeup_lipstick);
+
 
         SeekBar seekBar1 = findViewById(R.id.seekBar2);
 
