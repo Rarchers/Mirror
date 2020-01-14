@@ -8,26 +8,40 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Path;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleveroad.sy.cyclemenuwidget.CycleMenuWidget;
+import com.cleveroad.sy.cyclemenuwidget.OnMenuItemClickListener;
+import com.rarcher.mirror.Info.Makeup;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+import static com.rarcher.mirror.FaceOverlapFragment.faceInfo;
+
+public class MainActivity extends AppCompatActivity  {
 
     CycleMenuWidget cycleMenuWidget;
-
-
+    CycleMenuWidget cycleMenuWidgetleft;
+    Makeup makeup = new Makeup();
+    HashMap<String,Integer> map = makeup.getMap();
+    String[]ClipColor = {"Mac_Lipstick_RUBY WOO","Mac_Lipstick_DIVA","Mac_Lipstick_RUSSIANRED","Mac_Lipstick_SEE SHEER","Mac_Lipstick_LADYDANGER","Mac_Lipstick_CHILI",
+            "Mac_Lipstick_COCKNEY","Mac_Lipstick_LADY BUG","Mac_Lipstick_MOCHA","Mac_Lipstick_DANGEROUS"};
 
     private final static int CAMERA_REQUEST_CODE = 0x111;
     public void copyFilesFromAssets(Context context, String oldPath, String newPath) {
@@ -104,12 +118,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cycleMenuWidget = findViewById(R.id.itemCycleMenuWidget);
+        cycleMenuWidgetleft = findViewById(R.id.itemCycleMenuWidgetleft);
+        cycleMenuWidgetleft.setMenuRes(R.menu.choose);
         cycleMenuWidget.setMenuRes(R.menu.makeup_lipstick);
 
 
-        SeekBar seekBar1 = findViewById(R.id.seekBar2);
 
-        final TextView textView1 = findViewById(R.id.textView2);
+
+
+
+
+        cycleMenuWidget.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public void onMenuItemClick(View view, int itemPosition) {
+                Toast.makeText(getApplicationContext(),"当前点击："+ClipColor[itemPosition],Toast.LENGTH_SHORT).show();
+                FaceOverlapFragment.Clip_Color = map.get(ClipColor[itemPosition]);
+            }
+
+            @Override
+            public void onMenuItemLongClick(View view, int itemPosition) {
+
+            }
+        });
+
+        cycleMenuWidgetleft.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public void onMenuItemClick(View view, int itemPosition) {
+
+            }
+
+            @Override
+            public void onMenuItemLongClick(View view, int itemPosition) {
+
+            }
+        });
+
+
+      /*  SeekBar seekBar1 = findViewById(R.id.seekBar2);
+
+        final TextView textView1 = findViewById(R.id.textView2);*/
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -127,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      /*  seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float v = progress;
@@ -145,13 +192,17 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
-        });
+        });*/
 
 
 
         verifyStoragePermissions(this);
 
         InitModelFiles();
+
+
+
+
 
     }
 
@@ -198,4 +249,9 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
     }
-}
+
+
+
+
+
+    }

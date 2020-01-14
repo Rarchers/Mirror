@@ -3,21 +3,33 @@ package com.rarcher.mirror;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Matrix;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
+import zeusees.tracking.FaceInfo;
 
-public class CameraOverlapFragment extends Fragment {
+import static com.rarcher.mirror.FaceOverlapFragment.Alpha;
+import static com.rarcher.mirror.FaceOverlapFragment.blur_radius;
+import static com.rarcher.mirror.FaceOverlapFragment.faceInfo;
+
+
+public class CameraOverlapFragment extends Fragment implements View.OnTouchListener  {
 
     protected Camera mCamera = null;
     protected CameraInfo mCameraInfo = null;
@@ -45,19 +57,21 @@ public class CameraOverlapFragment extends Fragment {
         mOverlap.setZOrderOnTop(true);
         mOverlap.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         mSurfaceHolder = mSurfaceview.getHolder();
-       /* mSurfaceview.setOnClickListener(
+        mSurfaceview.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        *//*if (CameraFacing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+
+
+                    /*    if (CameraFacing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                             CameraFacing = Camera.CameraInfo.CAMERA_FACING_BACK;
                         } else {
                             CameraFacing = Camera.CameraInfo.CAMERA_FACING_FRONT;
-                        }*//*
-                        openCamera(CameraFacing);
+                        }
+                        openCamera(CameraFacing);*/
                     }
                 }
-        );*/
+        );
         mSurfaceHolder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format,
@@ -90,6 +104,47 @@ public class CameraOverlapFragment extends Fragment {
 
         return view;
     }
+
+
+
+
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        switch (event.getAction()) {
+            /**
+             * 点击的开始位置
+             */
+            case MotionEvent.ACTION_DOWN:
+                Toast.makeText(getActivity(), "点击了", Toast.LENGTH_SHORT).show();
+                break;
+            /**
+             * 触屏实时位置
+             */
+            case MotionEvent.ACTION_MOVE:
+
+                break;
+            /**
+             * 离开屏幕的位置
+             */
+            case MotionEvent.ACTION_UP:
+
+                break;
+            default:
+                break;
+        }
+
+        /**
+         *  注意返回值
+         *  true：view继续响应Touch操作；
+         *  false：view不再响应Touch操作，故此处若为false，只能显示起始位置，不能显示实时位置和结束位置
+         */
+        return true;
+    }
+
+
+
 
     private void openCamera(int CameraFacing) {
         if (null != mCamera) {

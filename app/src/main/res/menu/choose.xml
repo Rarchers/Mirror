@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Clip" android:icon="@drawable/bat"></item>
+    <item android:title="Blush" android:icon="@drawable/bear"> </item>
+    <item android:title="Lashes" android:icon="@drawable/bear"> </item>
+    <item android:title="EyeShadow" android:icon="@drawable/bear"> </item>
+</menu>

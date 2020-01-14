@@ -1,16 +1,22 @@
 package zeusees.tracking;
 
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.PointF;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FaceInfo {
     Path clip_up;
     Path clip_down;
 
-    public FaceInfo(PointF[] pointFS,int width){
+
+    public FaceInfo(PointF[] pointFS, int width){
 
         clip_up = getClip_up(pointFS,width);
         clip_down = getClip_down(pointFS,width);
+
     }
 
     public Path getClip_up() {
@@ -68,6 +74,9 @@ public class FaceInfo {
 
         return path;
     }
+
+
+
 
 
 

@@ -10,7 +10,9 @@ public class Makeup {
         initMap();
     }
 
-
+    public HashMap<String, Integer> getMap() {
+        return map;
+    }
 
     private void initMap(){
         map.put("Mac_Lipstick_RUBY WOO",0x8feb3452);

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <SeekBar
+  <!--  <SeekBar
         android:id="@+id/seekBar2"
         style="@android:style/Widget.Holo.SeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
-        android:progress="5" />
+        android:progress="5" />-->
 
     <com.rarcher.mirror.FixedAspectRatioFrameLayout
         android:id="@+id/framelayout"
@@ -32,22 +32,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            app:cm_autoMaxRadius="220dp"
+            app:cm_autoMaxRadius="150dp"
             app:cm_autoMinRadius="10dp"
             app:cm_corner="right_bottom"
             app:cm_fixedRadius="200dp"
             app:cm_radius_scale_type="auto"
             app:cm_scroll_type="endless"
+            app:cm_background="@color/backgroundright"
             app:cm_item_background_tint="#449955"
             app:cm_corner_image_src="@drawable/ic_menu"
-            app:cm_ripple_color="#009933"
+            app:cm_ripple_color="@color/backgroundright"
             />
-        />
-        <TextView
+        <com.cleveroad.sy.cyclemenuwidget.CycleMenuWidget
+            android:id="@+id/itemCycleMenuWidgetleft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cm_autoMaxRadius="150dp"
+            app:cm_autoMinRadius="10dp"
+            app:cm_corner="left_bottom"
+            app:cm_fixedRadius="200dp"
+            app:cm_radius_scale_type="auto"
+            app:cm_scroll_type="endless"
+            app:cm_background="@color/backgroundleft"
+            app:cm_item_background_tint="#449955"
+            app:cm_corner_image_src="@drawable/ic_menu"
+            app:cm_ripple_color="@color/backgroundleft"
+            />
+
+
+   <!--     <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="高斯模糊值" />
+            android:text="高斯模糊值" />-->
 
     </com.rarcher.mirror.FixedAspectRatioFrameLayout>
 

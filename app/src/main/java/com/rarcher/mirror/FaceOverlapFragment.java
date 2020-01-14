@@ -1,6 +1,7 @@
 package com.rarcher.mirror;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,13 +41,14 @@ import zeusees.tracking.FaceTracking;
 
 public class FaceOverlapFragment extends CameraOverlapFragment {
 
-
+    static FaceInfo faceInfo;
     public static int Alpha = 100;
-    public static float blur_radius = 0.5f;
+    public static float blur_radius = 8.5f;
     public static int Clip_Color = 0x8feb3452;
 
-    Makeup makeup = new Makeup();
-
+    public static void setClip_Color(int clip_Color) {
+        Clip_Color = clip_Color;
+    }
 
     private static final int MESSAGE_DRAW_POINTS = 100;
     private FaceTracking mMultiTrack106 = null;
@@ -188,7 +193,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 
         //这个地方详细进行分类，调用FaceInfo类来获取详细的区域信息
 
-        FaceInfo faceInfo = new FaceInfo(points,width);
+        faceInfo = new FaceInfo(points,width);
         Path clip_up = faceInfo.getClip_up();
         Path clip_down = faceInfo.getClip_down();
 
@@ -212,6 +217,10 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
             }
 
             paint.setColor(Clip_Color);
+          /*  Paint text = new Paint();
+            text.setTextSize(100);
+            text.setColor(0xffffffff);
+            canvas.drawText("当前颜色："+Clip_Color,50,50,text);*/
          //   paint.setColor(0XD81B60);
             paint.setAlpha(Alpha);
             paint.setStyle(Style.FILL);
@@ -222,6 +231,13 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 
         }
     }
+
+
+
+
+
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -275,5 +291,9 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
         void onTrackdetected(int value, float pitch, float roll, float yaw, float eye_dist,
                              int id, int eyeBlink, int mouthAh, int headYaw, int headPitch, int browJump);
     }
+
+
+
+
 
 }
