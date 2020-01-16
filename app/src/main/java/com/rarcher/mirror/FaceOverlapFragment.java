@@ -198,9 +198,9 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
         Path clip_down = faceInfo.getClip_down();
 
         if (canvas != null) {
-            int strokeWidth = Math.max(width / 240, 2);
+            //int strokeWidth = Math.max(width / 240, 2);
 
-            for(int i = 0; i <points.length; ++i) {
+           /* for(int i = 0; i <points.length; ++i) {
                 PointF p = points[i];
                 if (frontCamera) {
                     p.x = (float)width - p.x;
@@ -214,7 +214,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 
               //  canvas.drawCircle(p.x, p.y, (float)strokeWidth, paint);
                 canvas.drawText(""+i,p.x,p.y,paint);
-            }
+            }*/
 
             paint.setColor(Clip_Color);
           /*  Paint text = new Paint();

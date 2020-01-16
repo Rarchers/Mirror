@@ -1,12 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Mac_Lipstick_RUBY_WOO" android:icon="@drawable/bat"></item>
-    <item android:title="Mac_Lipstick_DIVA" android:icon="@drawable/bear"> </item>
-    <item android:title="Mac_Lipstick_RUSSIANRED" android:icon="@drawable/eagle"> </item>
-    <item android:title="Mac_Lipstick_SEE_SHEER" android:icon="@drawable/elephant"> </item>
-    <item android:title="Mac_Lipstick_LADYDANGER" android:icon="@drawable/butterfly"> </item>
-    <item android:title="Mac_Lipstick_CHILI" android:icon="@drawable/cat"> </item>
-    <item android:title="Mac_Lipstick_COCKNEY" android:icon="@drawable/deer"> </item>
-    <item android:title="Mac_Lipstick_LADY_BUG" android:icon="@drawable/dolphin"> </item>
-    <item android:title="Mac_Lipstick_MOCHA" android:icon="@drawable/rat"> </item>
-    <item android:title="Mac_Lipstick_DANGEROUS" android:icon="@drawable/peacock"> </item>
+    <item android:title="Mac_Lipstick_RUBY_WOO" android:icon="@drawable/mac_rubywoo"></item>
+    <item android:title="Mac_Lipstick_DIVA" android:icon="@drawable/mac_diva"> </item>
+    <item android:title="Mac_Lipstick_RUSSIANRED" android:icon="@drawable/mac_rubywoo"> </item>
+    <item android:title="Mac_Lipstick_SEE_SHEER" android:icon="@drawable/mac_seasheer"> </item>
+    <item android:title="Mac_Lipstick_LADYDANGER" android:icon="@drawable/mac_ladydanger"> </item>
+    <item android:title="Mac_Lipstick_CHILI" android:icon="@drawable/mac_chili"> </item>
+    <item android:title="Mac_Lipstick_COCKNEY" android:icon="@drawable/mac_cockney"> </item>
+    <item android:title="Mac_Lipstick_LADY_BUG" android:icon="@drawable/mac_ladybug"> </item>
+    <item android:title="Mac_Lipstick_MOCHA" android:icon="@drawable/mac_mocha"> </item>
+    <item android:title="Mac_Lipstick_DANGEROUS" android:icon="@drawable/mac_dangerous"> </item>
 </menu>

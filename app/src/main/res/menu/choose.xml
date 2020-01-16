@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Clip" android:icon="@drawable/bat"></item>
-    <item android:title="Blush" android:icon="@drawable/bear"> </item>
-    <item android:title="Lashes" android:icon="@drawable/bear"> </item>
-    <item android:title="EyeShadow" android:icon="@drawable/bear"> </item>
+    <item android:title="Clip" android:icon="@drawable/kouhong"></item>
+    <item android:title="Blush" android:icon="@drawable/saihong"> </item>
+    <item android:title="Lashes" android:icon="@drawable/jiemao"> </item>
+    <item android:title="EyeShadow" android:icon="@drawable/meitong"> </item>
+    <item android:title="Foundation" android:icon="@drawable/fendi"> </item>
 </menu>
