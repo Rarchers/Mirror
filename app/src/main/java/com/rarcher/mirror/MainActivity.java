@@ -8,21 +8,17 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Path;
-import android.graphics.RectF;
-import android.graphics.Region;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cleveroad.sy.cyclemenuwidget.CycleMenuItem;
 import com.cleveroad.sy.cyclemenuwidget.CycleMenuWidget;
 import com.cleveroad.sy.cyclemenuwidget.OnMenuItemClickListener;
 import com.rarcher.mirror.Info.Makeup;
@@ -30,18 +26,41 @@ import com.rarcher.mirror.Info.Makeup;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
-import static com.rarcher.mirror.FaceOverlapFragment.faceInfo;
-
 public class MainActivity extends AppCompatActivity  {
+
+
+    Collection<CycleMenuItem> lip;
+    Collection<CycleMenuItem> blush;
+    Collection<CycleMenuItem> eyeshadow;
+    Collection<CycleMenuItem> lashes;
+    Collection<CycleMenuItem> foundation;
+
+
+
+
+
+
+
+
+
+
 
     CycleMenuWidget cycleMenuWidget;
     CycleMenuWidget cycleMenuWidgetleft;
     Makeup makeup = new Makeup();
+   // C c = new C(getApplicationContext());
     HashMap<String,Integer> map = makeup.getMap();
     String[]ClipColor = {"Mac_Lipstick_RUBY WOO","Mac_Lipstick_DIVA","Mac_Lipstick_RUSSIANRED","Mac_Lipstick_SEE SHEER","Mac_Lipstick_LADYDANGER","Mac_Lipstick_CHILI",
             "Mac_Lipstick_COCKNEY","Mac_Lipstick_LADY BUG","Mac_Lipstick_MOCHA","Mac_Lipstick_DANGEROUS"};
+    String[]Blush = {"Mac_Blush_LOVECLOUD","Mac_Blush_PEONY PETAL","Mac_Blush_Full OF JOY","Mac_Blush_PINK TEA","Mac_Blush_MODERN MANDARIN","Mac_Blush_IMMORTAL FLOWER"};
+    String[]Choose = {"Clip","Blush","Lashes","EyeShadow","Foundation"};
+    String[]Choose_Chinese={"口红","腮红","睫毛","眼影","粉底"};
+    String[]Foundation = {"Armani_#2#","Armani_#3#","Armani_#3.5#","Armani_#4#","Armani_#5#"};
+    String NowChoose = "Clip";
 
     private final static int CAMERA_REQUEST_CODE = 0x111;
     public void copyFilesFromAssets(Context context, String oldPath, String newPath) {
@@ -93,7 +112,6 @@ public class MainActivity extends AppCompatActivity  {
             "android.permission.READ_EXTERNAL_STORAGE",
             "android.permission.WRITE_EXTERNAL_STORAGE" };
 
-
     public static void verifyStoragePermissions(Activity activity) {
 
         try {
@@ -109,30 +127,39 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        init();
+
+
         cycleMenuWidget = findViewById(R.id.itemCycleMenuWidget);
         cycleMenuWidgetleft = findViewById(R.id.itemCycleMenuWidgetleft);
         cycleMenuWidgetleft.setMenuRes(R.menu.choose);
-        cycleMenuWidget.setMenuRes(R.menu.makeup_lipstick);
-
-
-
-
-
-
-
+       // cycleMenuWidget.setMenuRes(R.menu.makeup_lipstick);
+       cycleMenuWidget.setMenuItems(lip);
         cycleMenuWidget.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public void onMenuItemClick(View view, int itemPosition) {
-                Toast.makeText(getApplicationContext(),"当前点击："+ClipColor[itemPosition],Toast.LENGTH_SHORT).show();
-                FaceOverlapFragment.Clip_Color = map.get(ClipColor[itemPosition]);
+
+                switch (NowChoose){
+                    case "Clip":
+                        Toast.makeText(getApplicationContext(),"当前点击："+ClipColor[itemPosition],Toast.LENGTH_SHORT).show();
+                        FaceOverlapFragment.Clip_Color = map.get(ClipColor[itemPosition]);
+                        break;
+                    case "Blush":
+                        Toast.makeText(getApplicationContext(),"当前点击："+Blush[itemPosition],Toast.LENGTH_SHORT).show();
+                        FaceOverlapFragment.Blush_Color = map.get(Blush[itemPosition]);
+                        break;
+                    case"Foundation":
+                        Toast.makeText(getApplicationContext(),"当前点击："+Foundation[itemPosition],Toast.LENGTH_SHORT).show();
+                        FaceOverlapFragment.Foundation_Color = map.get(Foundation[itemPosition]);
+                        break;
+                }
+
             }
 
             @Override
@@ -144,6 +171,33 @@ public class MainActivity extends AppCompatActivity  {
         cycleMenuWidgetleft.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public void onMenuItemClick(View view, int itemPosition) {
+                Toast.makeText(getApplicationContext(),"当前点击："+Choose_Chinese[itemPosition],Toast.LENGTH_SHORT).show();
+                NowChoose = Choose[itemPosition];
+                cycleMenuWidget.clearDisappearingChildren();
+                switch (Choose[itemPosition]){
+                    case "Clip":
+                       //cycleMenuWidget.setMenuRes(R.menu.makeup_lipstick);
+                        cycleMenuWidget.setMenuItems(lip);
+                        break;
+                    case "Blush":
+                      // cycleMenuWidget.setMenuRes(R.menu.makeup_blush);
+                        cycleMenuWidget.setMenuItems(blush);
+                        break;
+                    case "Lashes":
+                        cycleMenuWidget.setMenuRes(R.menu.makeup_lashes);
+                        break;
+                    case "EyeShadow":
+                        cycleMenuWidget.setMenuRes(R.menu.makeup_eyeshadow);
+                        break;
+                    case "Foundation":
+                        cycleMenuWidget.setMenuItems(foundation);
+                        break;
+
+                }
+
+
+
+
 
             }
 
@@ -152,11 +206,6 @@ public class MainActivity extends AppCompatActivity  {
 
             }
         });
-
-
-      /*  SeekBar seekBar1 = findViewById(R.id.seekBar2);
-
-        final TextView textView1 = findViewById(R.id.textView2);*/
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -173,28 +222,6 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         }
-
-      /*  seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float v = progress;
-                v/=10;
-                textView1.setText("当前高斯模糊数值:"+  v  );
-                FaceOverlapFragment.blur_radius = v;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });*/
-
-
 
         verifyStoragePermissions(this);
 
@@ -223,7 +250,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         }
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -252,6 +278,107 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+
+
+
+    private void init(){
+        lip = new ArrayList<CycleMenuItem>();
+        Resources resources = this.getResources();
+
+
+        Drawable drawable = resources.getDrawable(R.drawable.mac_rubywoo);
+        CycleMenuItem li = new CycleMenuItem(1,drawable);
+        lip.add(li);
+
+        drawable = resources.getDrawable(R.drawable.mac_diva);
+        li = new CycleMenuItem(2,drawable);
+        lip.add(li);
+
+        drawable = resources.getDrawable(R.drawable.mac_rubywoo);
+        li = new CycleMenuItem(3,drawable);
+        lip.add(li);
+
+        drawable = resources.getDrawable(R.drawable.mac_seasheer);
+        li = new CycleMenuItem(4,drawable);
+        lip.add(li);
+
+        drawable = resources.getDrawable(R.drawable.mac_ladydanger);
+        li = new CycleMenuItem(5,drawable);
+        lip.add(li);
+        drawable = resources.getDrawable(R.drawable.mac_chili);
+        li = new CycleMenuItem(6,drawable);
+        lip.add(li);
+        drawable = resources.getDrawable(R.drawable.mac_cockney);
+        li = new CycleMenuItem(7,drawable);
+        lip.add(li);
+        drawable = resources.getDrawable(R.drawable.mac_ladybug);
+        li = new CycleMenuItem(8,drawable);
+        lip.add(li);
+        drawable = resources.getDrawable(R.drawable.mac_mocha);
+        li = new CycleMenuItem(9,drawable);
+        lip.add(li);
+        drawable = resources.getDrawable(R.drawable.mac_dangerous);
+        li = new CycleMenuItem(10,drawable);
+        lip.add(li);
+
+
+
+
+
+
+
+        blush = new ArrayList<CycleMenuItem>();
+        drawable = resources.getDrawable(R.drawable.lovecloud);
+        li = new CycleMenuItem(1,drawable);
+        blush.add(li);
+
+        drawable = resources.getDrawable(R.drawable.peony_petal);
+        li = new CycleMenuItem(2,drawable);
+        blush.add(li);
+
+        drawable = resources.getDrawable(R.drawable.full_of_joy);
+        li = new CycleMenuItem(3,drawable);
+        blush.add(li);
+
+        drawable = resources.getDrawable(R.drawable.pink_tea);
+        li = new CycleMenuItem(4,drawable);
+        blush.add(li);
+
+        drawable = resources.getDrawable(R.drawable.modern_mandarin);
+        li = new CycleMenuItem(5,drawable);
+        blush.add(li);
+
+        drawable = resources.getDrawable(R.drawable.immortal_flower);
+        li = new CycleMenuItem(6,drawable);
+        blush.add(li);
+
+
+        foundation = new ArrayList<>();
+
+        drawable = resources.getDrawable(R.drawable.foundation2);
+        li = new CycleMenuItem(1,drawable);
+        foundation.add(li);
+
+        drawable = resources.getDrawable(R.drawable.foundation3);
+        li = new CycleMenuItem(2,drawable);
+        foundation.add(li);
+
+        drawable = resources.getDrawable(R.drawable.foundation3_5);
+        li = new CycleMenuItem(3,drawable);
+        foundation.add(li);
+
+        drawable = resources.getDrawable(R.drawable.foundation4);
+        li = new CycleMenuItem(4,drawable);
+        foundation.add(li);
+
+        drawable = resources.getDrawable(R.drawable.foundation5);
+        li = new CycleMenuItem(5,drawable);
+        foundation.add(li);
+
+
+
+
+    }
 
 
     }

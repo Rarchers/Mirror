@@ -45,6 +45,8 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
     public static int Alpha = 100;
     public static float blur_radius = 8.5f;
     public static int Clip_Color = 0x8feb3452;
+    public static int Blush_Color = 0x8feb3452;
+    public static int Foundation_Color = 0x8feb3452;
 
     public static void setClip_Color(int clip_Color) {
         Clip_Color = clip_Color;

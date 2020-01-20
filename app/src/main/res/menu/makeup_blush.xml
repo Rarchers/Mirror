@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Mac_Blush_LOVECLOUD" android:icon="@drawable/lovecloud"></item>
+    <item android:title="Mac_Blush_PEONY PETAL" android:icon="@drawable/peony_petal"> </item>
+    <item android:title="Mac_Blush_Full OF JOY" android:icon="@drawable/full_of_joy"> </item>
+    <item android:title="Mac_Blush_PINK TEA" android:icon="@drawable/pink_tea"> </item>
+    <item android:title="Mac_Blush_MODERN MANDARIN" android:icon="@drawable/modern_mandarin"> </item>
+    <item android:title="Mac_Blush_IMMORTAL FLOWER" android:icon="@drawable/immortal_flower"> </item>
+
+</menu>
