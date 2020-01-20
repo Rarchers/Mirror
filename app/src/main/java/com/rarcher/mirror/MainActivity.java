@@ -147,16 +147,22 @@ public class MainActivity extends AppCompatActivity  {
 
                 switch (NowChoose){
                     case "Clip":
+
                         Toast.makeText(getApplicationContext(),"当前点击："+ClipColor[itemPosition],Toast.LENGTH_SHORT).show();
                         FaceOverlapFragment.Clip_Color = map.get(ClipColor[itemPosition]);
+
                         break;
                     case "Blush":
+
                         Toast.makeText(getApplicationContext(),"当前点击："+Blush[itemPosition],Toast.LENGTH_SHORT).show();
                         FaceOverlapFragment.Blush_Color = map.get(Blush[itemPosition]);
+
                         break;
                     case"Foundation":
+
                         Toast.makeText(getApplicationContext(),"当前点击："+Foundation[itemPosition],Toast.LENGTH_SHORT).show();
                         FaceOverlapFragment.Foundation_Color = map.get(Foundation[itemPosition]);
+
                         break;
                 }
 
@@ -177,20 +183,30 @@ public class MainActivity extends AppCompatActivity  {
                 switch (Choose[itemPosition]){
                     case "Clip":
                        //cycleMenuWidget.setMenuRes(R.menu.makeup_lipstick);
+                        cycleMenuWidget.close(true);
+
                         cycleMenuWidget.setMenuItems(lip);
+                        cycleMenuWidget.open(true);
+                        cycleMenuWidgetleft.close(true);
                         break;
                     case "Blush":
+                        cycleMenuWidget.close(true);
                       // cycleMenuWidget.setMenuRes(R.menu.makeup_blush);
                         cycleMenuWidget.setMenuItems(blush);
+                        cycleMenuWidget.open(true);
+                        cycleMenuWidgetleft.close(true);
                         break;
                     case "Lashes":
-                        cycleMenuWidget.setMenuRes(R.menu.makeup_lashes);
+                     //   cycleMenuWidget.setMenuRes(R.menu.makeup_lashes);
                         break;
                     case "EyeShadow":
-                        cycleMenuWidget.setMenuRes(R.menu.makeup_eyeshadow);
+                  //      cycleMenuWidget.setMenuRes(R.menu.makeup_eyeshadow);
                         break;
                     case "Foundation":
+                        cycleMenuWidget.close(true);
                         cycleMenuWidget.setMenuItems(foundation);
+                        cycleMenuWidget.open(true);
+                        cycleMenuWidgetleft.close(true);
                         break;
 
                 }
