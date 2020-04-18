@@ -45,8 +45,8 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
     public static int Alpha = 100;
     public static float blur_radius = 8.5f;
     public static int Clip_Color = 0x8feb3452;
-    public static int Blush_Color = 0x8feb3452;
-    public static int Foundation_Color = 0x8feb3452;
+    public static int Blush_Color = 0xc7dc909a;
+    public static int Foundation_Color = Color.WHITE;
 
     public static void setClip_Color(int clip_Color) {
         Clip_Color = clip_Color;
@@ -198,11 +198,14 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
         faceInfo = new FaceInfo(points,width);
         Path clip_up = faceInfo.getClip_up();
         Path clip_down = faceInfo.getClip_down();
+        Path face = faceInfo.getFoundation();
+        float[] blush = faceInfo.getBlush();
+
 
         if (canvas != null) {
             //int strokeWidth = Math.max(width / 240, 2);
 
-           /* for(int i = 0; i <points.length; ++i) {
+            for(int i = 0; i <points.length; ++i) {
                 PointF p = points[i];
                 if (frontCamera) {
                     p.x = (float)width - p.x;
@@ -216,19 +219,38 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 
               //  canvas.drawCircle(p.x, p.y, (float)strokeWidth, paint);
                 canvas.drawText(""+i,p.x,p.y,paint);
-            }*/
+            }
 
             paint.setColor(Clip_Color);
           /*  Paint text = new Paint();
             text.setTextSize(100);
             text.setColor(0xffffffff);
             canvas.drawText("当前颜色："+Clip_Color,50,50,text);*/
-         //   paint.setColor(0XD81B60);
+           // paint.setColor(0XD81B60);
             paint.setAlpha(Alpha);
             paint.setStyle(Style.FILL);
             paint.setMaskFilter(new BlurMaskFilter(blur_radius, BlurMaskFilter.Blur.NORMAL));
+            Paint facepaint = new Paint();
+            facepaint.setColor(Foundation_Color);
+            facepaint.setAlpha(50);
+            facepaint.setStyle(Style.FILL);
+            facepaint.setMaskFilter(new BlurMaskFilter(blur_radius, BlurMaskFilter.Blur.NORMAL));
+
+
+            Paint blushpatin = new Paint();
+            blushpatin.setColor(Blush_Color);
+            blushpatin.setAlpha(50);
+            blushpatin.setStyle(Style.FILL);
+            blushpatin.setMaskFilter(new BlurMaskFilter(blur_radius, BlurMaskFilter.Blur.NORMAL));
+
+
+            canvas.drawPath(face,facepaint);
+            canvas.drawCircle(blush[0],blush[1],100,blushpatin);
+            canvas.drawCircle(blush[2],blush[3],100,blushpatin);
             canvas.drawPath(clip_up,paint);
             canvas.drawPath(clip_down,paint);
+
+
 
 
         }

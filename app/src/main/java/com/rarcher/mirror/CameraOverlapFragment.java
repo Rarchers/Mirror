@@ -22,13 +22,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import zeusees.tracking.FaceInfo;
-
-import static com.rarcher.mirror.FaceOverlapFragment.Alpha;
-import static com.rarcher.mirror.FaceOverlapFragment.blur_radius;
-import static com.rarcher.mirror.FaceOverlapFragment.faceInfo;
-
-
 public class CameraOverlapFragment extends Fragment implements View.OnTouchListener  {
 
     protected Camera mCamera = null;

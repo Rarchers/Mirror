@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FaceInfo {
-    Path clip_up;
-    Path clip_down;
-    Path lashes_left;
-    Path lashes_right;
-    Path eyebrows_left;
-    Path eyebrows_right;
+    private Path clip_up;
+    private Path clip_down;
+    private Path lashes_left;
+    private Path lashes_right;
+    private Path eyebrows_left;
+    private Path eyebrows_right;
+    private Path face;
+    float[] blush;
 
     public FaceInfo(PointF[] pointFS, int width){
 
@@ -24,6 +26,8 @@ public class FaceInfo {
         lashes_right = getLashes_right(pointFS,width);
         eyebrows_left = getEyebrows_left(pointFS,width);
         eyebrows_right = getEyebrows_right(pointFS,width);
+        face = getFoundation(pointFS, width);
+        blush = getBlush(pointFS,width);
 
     }
 
@@ -33,6 +37,12 @@ public class FaceInfo {
 
     public Path getClip_down() {
         return clip_down;
+    }
+    public Path getFoundation(){
+        return face;
+    }
+    public float[] getBlush(){
+        return blush;
     }
 
     public Path getLashes_left() {
@@ -146,6 +156,68 @@ public class FaceInfo {
         path.lineTo(width-pointFS[48].x,pointFS[48].y);
         path.lineTo(width-pointFS[74].x,pointFS[74].y);
         return path;
+    }
+
+
+    private Path getFoundation(PointF[] pointFS, int width){
+        Path path = new Path();
+        path.moveTo(width-pointFS[0].x,pointFS[0].y);
+        path.lineTo(width-pointFS[97].x,pointFS[97].y);
+        path.lineTo(width-pointFS[95].x,pointFS[95].y);
+        path.lineTo(width-pointFS[96].x,pointFS[96].y);
+        path.lineTo(width-pointFS[100].x,pointFS[100].y);
+        path.lineTo(width-pointFS[101].x,pointFS[101].y);
+        path.lineTo(width-pointFS[98].x,pointFS[98].y);
+        path.lineTo(width-pointFS[99].x,pointFS[99].y);
+        path.lineTo(width-pointFS[49].x,pointFS[49].y);
+        path.lineTo(width-pointFS[56].x,pointFS[56].y);
+        path.lineTo(width-pointFS[18].x,pointFS[18].y);
+        path.lineTo(width-pointFS[68].x,pointFS[68].y);
+        path.lineTo(width-pointFS[16].x,pointFS[16].y);
+        path.lineTo(width-pointFS[17].x,pointFS[17].y);
+        path.lineTo(width-pointFS[14].x,pointFS[14].y);
+        path.lineTo(width-pointFS[15].x,pointFS[15].y);
+        path.lineTo(width-pointFS[13].x,pointFS[13].y);
+        path.lineTo(width-pointFS[74].x,pointFS[74].y);
+        path.lineTo(width-pointFS[75].x,pointFS[75].y);
+        path.lineTo(width-pointFS[70].x,pointFS[70].y);
+        path.lineTo(width-pointFS[73].x,pointFS[73].y);
+        path.lineTo(width-pointFS[24].x,pointFS[24].y);
+        path.lineTo(width-pointFS[28].x,pointFS[28].y);
+        path.lineTo(width-pointFS[79].x,pointFS[79].y);
+        path.lineTo(width-pointFS[29].x,pointFS[29].y);
+        path.lineTo(width-pointFS[84].x,pointFS[84].y);
+        path.lineTo(width-pointFS[19].x,pointFS[19].y);
+        path.lineTo(width-pointFS[11].x,pointFS[11].y);
+        path.lineTo(width-pointFS[10].x,pointFS[10].y);
+        path.lineTo(width-pointFS[9].x,pointFS[9].y);
+        path.lineTo(width-pointFS[8].x,pointFS[8].y);
+        path.lineTo(width-pointFS[7].x,pointFS[7].y);
+        path.lineTo(width-pointFS[6].x,pointFS[6].y);
+        path.lineTo(width-pointFS[5].x,pointFS[5].y);
+        path.lineTo(width-pointFS[102].x,pointFS[102].y);
+        path.lineTo(width-pointFS[66].x,pointFS[66].y);
+        path.lineTo(width-pointFS[82].x,pointFS[82].y);
+        path.lineTo(width-pointFS[81].x,pointFS[81].y);
+        path.lineTo(width-pointFS[80].x,pointFS[80].y);
+        path.lineTo(width-pointFS[57].x,pointFS[57].y);
+        path.lineTo(width-pointFS[78].x,pointFS[78].y);
+        path.lineTo(width-pointFS[77].x,pointFS[77].y);
+        path.lineTo(width-pointFS[76].x,pointFS[76].y);
+        path.lineTo(width-pointFS[0].x,pointFS[0].y);
+
+        return path;
+    }
+
+
+    private float[] getBlush(PointF[] pointFS,int width){
+        float[] blush = new float[4];
+        blush[0] = (width-pointFS[5].x+width-pointFS[31].x)/2;
+        blush[1] = (pointFS[31].y+pointFS[90].y)/2;
+        blush[2] = (width-pointFS[93].x+width-pointFS[68].x)/2;
+        blush[3] = (pointFS[92].y+pointFS[93].y)/2;
+
+        return blush;
     }
 
 
