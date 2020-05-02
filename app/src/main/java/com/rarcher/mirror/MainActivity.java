@@ -38,28 +38,17 @@ public class MainActivity extends AppCompatActivity  {
     Collection<CycleMenuItem> eyeshadow;
     Collection<CycleMenuItem> lashes;
     Collection<CycleMenuItem> foundation;
-
-
-
-
-
-
-
-
-
-
-
     CycleMenuWidget cycleMenuWidget;
     CycleMenuWidget cycleMenuWidgetleft;
     Makeup makeup = new Makeup();
    // C c = new C(getApplicationContext());
     HashMap<String,Integer> map = makeup.getMap();
     String[]ClipColor = {"Mac_Lipstick_RUBY WOO","Mac_Lipstick_DIVA","Mac_Lipstick_RUSSIANRED","Mac_Lipstick_SEE SHEER","Mac_Lipstick_LADYDANGER","Mac_Lipstick_CHILI",
-            "Mac_Lipstick_COCKNEY","Mac_Lipstick_LADY BUG","Mac_Lipstick_MOCHA","Mac_Lipstick_DANGEROUS"};
-    String[]Blush = {"Mac_Blush_LOVECLOUD","Mac_Blush_PEONY PETAL","Mac_Blush_Full OF JOY","Mac_Blush_PINK TEA","Mac_Blush_MODERN MANDARIN","Mac_Blush_IMMORTAL FLOWER"};
-    String[]Choose = {"Clip","Blush","Lashes","EyeShadow","Foundation"};
-    String[]Choose_Chinese={"口红","腮红","睫毛","眼影","粉底"};
-    String[]Foundation = {"Armani_#2#","Armani_#3#","Armani_#3.5#","Armani_#4#","Armani_#5#"};
+            "Mac_Lipstick_COCKNEY","Mac_Lipstick_LADY BUG","Mac_Lipstick_MOCHA","Mac_Lipstick_DANGEROUS","None"};
+    String[]Blush = {"Mac_Blush_LOVECLOUD","Mac_Blush_PEONY PETAL","Mac_Blush_Full OF JOY","Mac_Blush_PINK TEA","Mac_Blush_MODERN MANDARIN","Mac_Blush_IMMORTAL FLOWER","None"};
+    String[]Choose = {"Clip","Blush","Lashes","EyeShadow","Foundation","None"};
+    String[]Choose_Chinese={"口红","腮红","睫毛","眼影","粉底","None"};
+    String[]Foundation = {"Armani_#2#","Armani_#3#","Armani_#3.5#","Armani_#4#","Armani_#5#","None"};
     String NowChoose = "Clip";
 
     private final static int CAMERA_REQUEST_CODE = 0x111;
@@ -147,21 +136,36 @@ public class MainActivity extends AppCompatActivity  {
 
                 switch (NowChoose){
                     case "Clip":
+                        if (ClipColor[itemPosition].equals("None")){
+                            FaceOverlapFragment.clip_close = true;
+                        }else {
+                            Toast.makeText(getApplicationContext(),"当前点击："+ClipColor[itemPosition],Toast.LENGTH_SHORT).show();
+                            FaceOverlapFragment.Clip_Color = map.get(ClipColor[itemPosition]);
+                            FaceOverlapFragment.clip_close = false;
+                        }
 
-                        Toast.makeText(getApplicationContext(),"当前点击："+ClipColor[itemPosition],Toast.LENGTH_SHORT).show();
-                        FaceOverlapFragment.Clip_Color = map.get(ClipColor[itemPosition]);
 
                         break;
                     case "Blush":
+                        if (Blush[itemPosition].equals("None")){
+                            FaceOverlapFragment.blush_close = true;
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"当前点击："+Blush[itemPosition],Toast.LENGTH_SHORT).show();
+                            FaceOverlapFragment.Blush_Color = map.get(Blush[itemPosition]);
+                            FaceOverlapFragment.blush_close = false;
+                        }
 
-                        Toast.makeText(getApplicationContext(),"当前点击："+Blush[itemPosition],Toast.LENGTH_SHORT).show();
-                        FaceOverlapFragment.Blush_Color = map.get(Blush[itemPosition]);
 
                         break;
                     case"Foundation":
-
-                        Toast.makeText(getApplicationContext(),"当前点击："+Foundation[itemPosition],Toast.LENGTH_SHORT).show();
-                        FaceOverlapFragment.Foundation_Color = map.get(Foundation[itemPosition]);
+                        if (Foundation[itemPosition].equals("None")){
+                            FaceOverlapFragment.foundation_close = true;
+                        }else {
+                            Toast.makeText(getApplicationContext(),"当前点击："+Foundation[itemPosition],Toast.LENGTH_SHORT).show();
+                            FaceOverlapFragment.Foundation_Color = map.get(Foundation[itemPosition]);
+                            FaceOverlapFragment.foundation_close = false;
+                        }
 
                         break;
                 }
@@ -337,6 +341,10 @@ public class MainActivity extends AppCompatActivity  {
         li = new CycleMenuItem(10,drawable);
         lip.add(li);
 
+        drawable = resources.getDrawable(R.drawable.ic_do_not_disturb_black_24dp);
+        li = new CycleMenuItem(11,drawable);
+        lip.add(li);
+
 
 
 
@@ -368,6 +376,10 @@ public class MainActivity extends AppCompatActivity  {
         li = new CycleMenuItem(6,drawable);
         blush.add(li);
 
+        drawable = resources.getDrawable(R.drawable.ic_do_not_disturb_black_24dp);
+        li = new CycleMenuItem(7,drawable);
+        blush.add(li);
+
 
         foundation = new ArrayList<>();
 
@@ -391,7 +403,9 @@ public class MainActivity extends AppCompatActivity  {
         li = new CycleMenuItem(5,drawable);
         foundation.add(li);
 
-
+        drawable = resources.getDrawable(R.drawable.ic_do_not_disturb_black_24dp);
+        li = new CycleMenuItem(6,drawable);
+        foundation.add(li);
 
 
     }

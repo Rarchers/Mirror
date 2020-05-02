@@ -25,6 +25,7 @@ public class Makeup {
         map.put("Mac_Lipstick_LADY BUG",0x7af95e64);
         map.put("Mac_Lipstick_MOCHA",0x9ed27570);
         map.put("Mac_Lipstick_DANGEROUS",0xadfa534d);
+        map.put("None",0x00000000);
 
         map.put("Armani_#2#",0x8fecc9b3);
         map.put("Armani_#3#",0x75f0cfbc);
